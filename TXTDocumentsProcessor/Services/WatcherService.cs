@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using static System.Console;
 using static System.ConsoleColor;
 
@@ -48,6 +50,23 @@ namespace TXTDocumentsProcessor.Services
         {
             ForegroundColor = Green;
             WriteLine($"File {e.Name} was added");
+
+            CountChars(e.FullPath, e.Name);
+        }
+
+        private static void CountChars(string filePath, string fileName)
+        {            
+            var charsCount = File.ReadAllText(filePath).Length;
+            var processedValuesPath = @"C:\processedValues\";
+            var isExists = Directory.Exists(processedValuesPath);
+
+            if (!isExists)
+            {
+                return;
+            }
+
+            using var writer = new StreamWriter(processedValuesPath + fileName);
+            writer.Write(charsCount);
         }
 
         #endregion
