@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TXTDocumentsProcessor": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\sourceStorage\" \"C:\\destinationStorage\""
+    }
+  }
+}

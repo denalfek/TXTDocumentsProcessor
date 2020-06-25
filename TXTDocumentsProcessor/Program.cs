@@ -1,4 +1,5 @@
 ﻿using System;
+using TXTDocumentsProcessor.Services;
 
 namespace TXTDocumentsProcessor
 {
@@ -6,7 +7,18 @@ namespace TXTDocumentsProcessor
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length != 3)
+            {
+                Console.WriteLine("Need 2 args: source folder path and destionation folder path");
+                return;
+            }
+
+            Console.WriteLine("Listning...");
+            WatcherService.Run(args[1]);
+
+            var key = Console.ReadLine();
+            if (key == "q") Console.WriteLine("Hello World!");
         }
     }
 }
