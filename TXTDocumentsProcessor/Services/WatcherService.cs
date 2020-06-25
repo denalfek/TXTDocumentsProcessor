@@ -8,8 +8,11 @@ namespace TXTDocumentsProcessor.Services
 {
     public static class WatcherService
     {
-        public static void Run(string path)
+        public static void Run()
         {
+            string[] args = Environment.GetCommandLineArgs();
+            string path = args[1];
+
             SubscribeToEvents(
                 new FileSystemWatcher
                 {
@@ -52,6 +55,7 @@ namespace TXTDocumentsProcessor.Services
             WriteLine($"File {e.Name} was added");
 
             CountChars(e.FullPath, e.Name);
+            CopyProcessedFile(e.FullPath, e.Name);
         }
 
         private static void CountChars(string filePath, string fileName)
@@ -67,6 +71,21 @@ namespace TXTDocumentsProcessor.Services
 
             using var writer = new StreamWriter(processedValuesPath + fileName);
             writer.Write(charsCount);
+        }
+
+        private static void CopyProcessedFile(string filePath, string fileName)
+        {
+            try
+            {
+                string[] args = Environment.GetCommandLineArgs();
+                var path = args[2];
+                var destPath = path + @"\" + fileName;
+                File.Copy(filePath, destPath);
+            }
+            catch(Exception ex)
+            {
+                WriteLine(ex.Message);
+            }
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace TXTDocumentsProcessor
             }
 
             Console.WriteLine("Listening...");
-            WatcherService.Run(args[1]);
+            WatcherService.Run();
 
             var key = Console.ReadLine();
             if (key == "q") Console.WriteLine("Bye");
