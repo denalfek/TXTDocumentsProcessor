@@ -14,11 +14,11 @@ namespace TXTDocumentsProcessor
                 return;
             }
 
-            Console.WriteLine("Listning...");
+            Console.WriteLine("Listening...");
             WatcherService.Run(args[1]);
 
             var key = Console.ReadLine();
-            if (key == "q") Console.WriteLine("Hello World!");
+            if (key == "q") Console.WriteLine("Bye");
         }
     }
 }
